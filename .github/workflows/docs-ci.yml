@@ -1,18 +1,6 @@
-name: docs-ci
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-
-jobs:
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Basic docs check
-        run: |
-          test -f README.md
-          test -d docs
-          test -d specs
-          echo "Docs structure OK ✅"
+- name: Basic docs check
+  run: |
+    (test -f README.md || test -f readme.md || test -f README.MD) || (echo "README file missing" && exit 1)
+    test -d docs
+    test -d specs
+    echo "Docs structure OK ✅"
