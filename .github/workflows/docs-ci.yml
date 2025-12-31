@@ -1,0 +1,18 @@
+name: docs-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Basic docs check
+        run: |
+          test -f README.md
+          test -d docs
+          test -d specs
+          echo "Docs structure OK ✅"
